@@ -67,6 +67,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             put("email", email)
             put("name", name)
         }
+//        gggg
         return db.insert("users", null, values)
     }
 
