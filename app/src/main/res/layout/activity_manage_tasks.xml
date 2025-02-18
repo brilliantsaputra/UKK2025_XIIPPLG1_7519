@@ -1,0 +1,41 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ListView
+        android:id="@+id/listViewTasks"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/btnAddTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tambah Tugas"
+        android:backgroundTint="#6495ED"/>
+
+    <Button
+        android:id="@+id/btnEditTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Tugas"
+        android:backgroundTint="#6495ED"/>
+
+    <Button
+        android:id="@+id/btnDeleteTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hapus Tugas"
+        android:backgroundTint="#6495ED"/>
+
+    <Button
+        android:id="@+id/btnMarkComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tandai Selesai"
+        android:backgroundTint="#6495ED"/>
+</LinearLayout>

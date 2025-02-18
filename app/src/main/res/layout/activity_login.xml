@@ -1,0 +1,57 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+
+    <TextView
+        android:id="@+id/tvLoginTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:paddingBottom="20dp"/>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="269dp"
+        app:srcCompat="@drawable/emon" />
+    <EditText
+        android:id="@+id/etUsernameLogin"
+        android:layout_width="380dp"
+        android:layout_height="66dp"
+        android:hint="Username" />
+
+    <EditText
+        android:id="@+id/etPasswordLogin"
+        android:layout_width="378dp"
+        android:layout_height="66dp"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:backgroundTint="#6495ED"/>
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum punya akun? Daftar di sini"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center"
+        android:paddingTop="16dp"/>
+
+
+
+
+</LinearLayout>

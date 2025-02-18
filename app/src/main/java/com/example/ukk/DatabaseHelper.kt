@@ -1,11 +1,15 @@
 package com.example.ukk
 
+
+
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.content.contentValuesOf
+import com.example.ukk.Task
+
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -61,15 +65,29 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     fun addUser(username: String, password: String, email: String?, name: String?): Long {
         val db = writableDatabase
+
+
+        val cursor = db.rawQuery("SELECT * FROM users WHERE username = ?", arrayOf(username))
+        if (cursor.count > 0) {
+            cursor.close()
+            throw IllegalArgumentException("Username sudah digunakan")
+        }
+        cursor.close()
+
+
+        if (password.length < 8 || !password.matches(Regex(".*[A-Za-z].*")) || !password.matches(Regex(".*[0-9].*"))) {
+            throw IllegalArgumentException("Password harus minimal 8 karakter dan mengandung huruf serta angka")
+        }
+
         val values = ContentValues().apply {
             put("username", username)
             put("password", password)
             put("email", email)
             put("name", name)
         }
-//        gggg
         return db.insert("users", null, values)
     }
+
 
 
     fun checkUser(username: String, password: String): Boolean {
@@ -126,6 +144,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
 
+
     fun getAllTasks(): Cursor {
         val db = readableDatabase
         return db.rawQuery("SELECT * FROM tasks", null)
@@ -150,6 +169,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
 
+
     fun setTaskCompleted(taskId: Int, isCompleted: Boolean): Int {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -157,6 +177,32 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return db.update("tasks", values, "id = ?", arrayOf(taskId.toString()))
     }
+
+
+
+    fun getTasksByCategory(categoryId: Int): List<Task> {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM tasks WHERE category_id = ?", arrayOf(categoryId.toString()))
+        val tasks = mutableListOf<Task>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                val task = Task(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    title = cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                    description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
+                    dueDate = cursor.getLong(cursor.getColumnIndexOrThrow("due_date")),
+                    completed = cursor.getInt(cursor.getColumnIndexOrThrow("completed")) == 1,
+                    categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"))
+                )
+                tasks.add(task)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return tasks
+    }
+
+
 }
 
 
