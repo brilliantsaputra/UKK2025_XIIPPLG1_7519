@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ukk.DatabaseHelper
 
 class LoginActivity : AppCompatActivity() {
 
@@ -41,10 +40,11 @@ class LoginActivity : AppCompatActivity() {
 
             if (dbHelper.checkUser(username, password)) {
                 val userId = dbHelper.getUserId(username)
-                val intent = Intent(this, ManageTasksActivity::class.java)
+                val intent = Intent(this, CategoryActivity::class.java)
                 intent.putExtra("USER_ID", userId)
                 startActivity(intent)
                 finish()
+
             } else {
                 Toast.makeText(this, "Username atau password salah!", Toast.LENGTH_SHORT).show()
             }
@@ -55,3 +55,5 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+
+

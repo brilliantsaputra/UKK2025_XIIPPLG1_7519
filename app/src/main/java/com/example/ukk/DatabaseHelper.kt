@@ -8,14 +8,13 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.content.contentValuesOf
-import com.example.ukk.Task
 
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "Ukk.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 3
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -32,13 +31,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db?.execSQL(createUsersTable)
 
         val createCategoriesTable = """
-            CREATE TABLE categories (
+          CREATE TABLE categories (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL UNIQUE,
+                category_name TEXT NOT NULL UNIQUE,
                 user_id INTEGER,
+                completed INTEGER DEFAULT 0,
                 FOREIGN KEY (user_id) REFERENCES users(id)
             );
+
+
         """.trimIndent()
+
         db?.execSQL(createCategoriesTable)
 
         val createTasksTable = """
@@ -110,14 +113,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
 
-    fun addCategory(name: String, userId: Int): Long {
-        val db = writableDatabase
-        val values = ContentValues().apply {
-            put("name", name)
-            put("user_id", userId)
-        }
-        return db.insert("categories", null, values)
+    fun addCategory(categoryName: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put("category_Name", categoryName)
+
+
+
+        val result = db.insert("categories", null, values)
+        db.close()
+
+        return result != -1L
     }
+
+
 
 
     fun deleteCategory(id: Int): Int {
@@ -125,11 +134,31 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db.delete("categories", "id = ?", arrayOf(id.toString()))
     }
 
-
-    fun getCategoriesByUser(userId: Int): Cursor {
+    fun getAllCategories(): Cursor {
         val db = readableDatabase
-        return db.rawQuery("SELECT * FROM categories WHERE user_id = ?", arrayOf(userId.toString()))
+        return db.rawQuery("SELECT * FROM categories", null)
     }
+
+
+    fun getCategoryById(id: Int): Cursor {
+        val db = readableDatabase
+        return db.rawQuery("SELECT * FROM categories WHERE id = ?", arrayOf(id.toString()))
+    }
+    fun updateCategory(id: Int, name: String) {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("name", name)
+        db.update("categories", values, "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+    fun setCategoryCompleted(id: Int, completed: Boolean) {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("completed", if (completed) 1 else 0)
+        db.update("categories", values, "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
 
 
     fun addTask(title: String, description: String?, dueDate: Long?, categoryId: Int): Long {
@@ -140,7 +169,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             put("due_date", dueDate)
             put("category_id", categoryId)
         }
-        return db.insert("tasks", null, values)
+        val result = db.insert("tasks", null, values)
+        db.close()
+        return result
     }
 
 
@@ -149,6 +180,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = readableDatabase
         return db.rawQuery("SELECT * FROM tasks", null)
     }
+    fun getTaskById(taskId: Int): Cursor {
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM tasks WHERE id = ?", arrayOf(taskId.toString()))
+    }
+
 
 
     fun deleteTask(taskId: Int): Int {
