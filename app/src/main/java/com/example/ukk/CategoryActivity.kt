@@ -17,9 +17,22 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
+
+
         dbHelper = DatabaseHelper(this)
         listViewCategories = findViewById(R.id.listViewCategories)
         listViewCategories.choiceMode = ListView.CHOICE_MODE_SINGLE
+
+        val imgProfile = findViewById<ImageView>(R.id.imgProfile)
+        imgProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+        val btnHistory = findViewById<Button>(R.id.btnHistory)
+        btnHistory.setOnClickListener {
+            val intent = Intent(this, RiwayatTugasActivity::class.java)
+            startActivity(intent)
+        }
 
 
 

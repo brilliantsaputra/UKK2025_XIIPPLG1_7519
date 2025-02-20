@@ -144,10 +144,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = readableDatabase
         return db.rawQuery("SELECT * FROM categories WHERE id = ?", arrayOf(id.toString()))
     }
-    fun updateCategory(id: Int, name: String) {
+    fun updateCategory(id: Int, category_name: String) {
         val db = writableDatabase
         val values = ContentValues()
-        values.put("name", name)
+        values.put("category_name", category_name)
         db.update("categories", values, "id = ?", arrayOf(id.toString()))
         db.close()
     }
@@ -236,6 +236,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         cursor.close()
         return tasks
+    }
+    fun getCompletedTasksByDateRange(startDate: Long, endDate: Long): Cursor {
+        val db = readableDatabase
+        val query = """
+        SELECT * FROM tasks
+        WHERE completed = 1
+        AND due_date >= ? AND due_date <= ?
+        ORDER BY due_date ASC
+    """.trimIndent()
+        return db.rawQuery(query, arrayOf(startDate.toString(), endDate.toString()))
     }
 
 

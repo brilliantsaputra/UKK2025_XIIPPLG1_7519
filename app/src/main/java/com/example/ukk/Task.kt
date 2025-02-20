@@ -7,4 +7,5 @@ data class Task(
     val dueDate: Long?,
     val completed: Boolean,
     val categoryId: Int
+
 )

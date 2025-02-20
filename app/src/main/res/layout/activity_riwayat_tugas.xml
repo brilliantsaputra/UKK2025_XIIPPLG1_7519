@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+
+    <Button
+        android:id="@+id/btnSelectDateRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pilih Rentang Tanggal"
+        android:backgroundTint="#6495ED"/>
+
+
+    <ListView
+        android:id="@+id/listViewHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/darker_gray"
+        android:textColor="@color/black"
+        android:dividerHeight="1dp" />
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.ukk
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +19,8 @@ class RegisterActivity : AppCompatActivity() {
 
         dbHelper = DatabaseHelper(this)
 
+
+
         val etUsername = findViewById<EditText>(R.id.etUsername)
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
@@ -35,6 +38,11 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Username dan password tidak boleh kosong", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val sharedPref = getSharedPreferences("login_prefs", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putString("username", username)
+            editor.putString("email", email)
+            editor.apply()
 
             try {
                 dbHelper.addUser(username, password, email, name)

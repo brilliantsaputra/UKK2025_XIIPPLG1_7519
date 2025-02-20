@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
-
-
+    android:padding="16dp"
+    android:background="#F5F5F5">
 
     <TextView
         android:id="@+id/tvLoginTitle"
@@ -18,31 +17,62 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:paddingBottom="20dp"/>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="269dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/emon" />
-    <EditText
-        android:id="@+id/etUsernameLogin"
-        android:layout_width="380dp"
-        android:layout_height="66dp"
-        android:hint="Username" />
+        app:srcCompat="@drawable/emon"
+        android:scaleType="centerInside"
+        android:padding="8dp"/>
 
-    <EditText
-        android:id="@+id/etPasswordLogin"
-        android:layout_width="378dp"
-        android:layout_height="66dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/btnLogin"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:backgroundTint="#6495ED"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/etUsernameLogin"
+                android:layout_width="352dp"
+                android:layout_height="63dp"
+                android:hint="Username"
+                android:textColor="@color/black"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/etPasswordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:drawableLeft="@android:drawable/ic_lock_lock"
+                android:padding="10dp"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:backgroundTint="#6495ED"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tvRegister"
@@ -51,9 +81,7 @@
         android:text="Belum punya akun? Daftar di sini"
         android:textColor="@android:color/holo_blue_dark"
         android:gravity="center"
-        android:paddingTop="16dp"/>
-
-
-
+        android:paddingTop="16dp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

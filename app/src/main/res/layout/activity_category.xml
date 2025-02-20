@@ -1,9 +1,12 @@
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
 
     <ImageView
         android:id="@+id/imgProfile"
@@ -15,46 +18,57 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_marginBottom="16dp"/>
-    <Button
-        android:id="@+id/btnAddCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tambah Kategori"
-        android:backgroundTint="#6495ED"/>
 
-    <Button
-        android:id="@+id/btnEditCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Edit Kategori"
-        android:backgroundTint="#6495ED"/>
 
-    <Button
-        android:id="@+id/btnDeleteCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hapus Kategori"
-        android:backgroundTint="#6495ED"/>
+        <Button
+            android:id="@+id/btnAddCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#6495ED"
+            android:text="Tambah Kategori" />
 
-    <Button
-        android:id="@+id/btnMarkCategoryComplete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tandai Selesai"
-        android:backgroundTint="#6495ED"/>
+        <Button
+            android:id="@+id/btnEditCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#6495ED"
+            android:text="Edit Kategori" />
+
+        <Button
+            android:id="@+id/btnDeleteCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#6495ED"
+            android:text="Hapus Kategori" />
+
+        <Button
+            android:id="@+id/btnMarkCategoryComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#6495ED"
+            android:text="Tandai Selesai" />
+
 
     <Button
         android:id="@+id/btnGoToTasks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lihat Tugas"
-        android:backgroundTint="#6495ED"
+        android:layout_width="379dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_gravity="center"/>
+        android:backgroundTint="#8FBC8F"
+        android:text="Lihat Tugas" />
+    <Button
+        android:id="@+id/btnHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Riwayat Tugas"
+        android:backgroundTint="#8FBC8F"
+        android:layout_marginTop="16dp" />
 
 
     <ListView
         android:id="@+id/listViewCategories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"/>
 </LinearLayout>

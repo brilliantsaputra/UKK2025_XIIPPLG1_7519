@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F5F5F5">
 
     <EditText
         android:id="@+id/etCategoryName"
         android:layout_width="378dp"
         android:layout_height="60dp"
-        android:hint="Nama Kategori" />
+        android:hint="Nama Kategori"
+        android:textColor="@color/black"/>
 
 </LinearLayout>
